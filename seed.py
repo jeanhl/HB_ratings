@@ -100,12 +100,12 @@ def load_ratings():
     # Read u.user file and insert data
     for row in open("seed_data/u.data"):
         row = row.rstrip()
+
         user_id, movie_id, score, timestamp = row.split("\t")
 
         rating = Rating(user_id=user_id,
                     movie_id=movie_id, 
-                    score=score, 
-                    timestamp=timestamp)
+                    score=score)
 
         # We need to add to the session or it won't ever be stored
         db.session.add(rating)
