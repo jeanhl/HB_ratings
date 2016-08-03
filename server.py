@@ -30,15 +30,43 @@ def index():
 
 @app.route("/register", methods=['GET'])
 def register_form():
-    """Shows the login form"""
 
     return render_template("register_form.html")
 
+
 @app.route("/register", methods=['POST'])
 def register_process():
-    """Shows the login form"""
 
     return redirect("/")
+
+
+@app.route('/login', methods=['POST'])
+def login_form():
+    """Processes login form."""
+
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    isUser = User.query.filter_by(email=username).all()
+
+    session[isUser[0].email] = isUser[0].password
+
+    if isUser[0].email == username and isUser[0].password == password:
+        flash("Logged In !!!!!")
+        return redirect("/")
+    else:
+        flash("Email / Password doesn't match. Try again.")
+        return redirect("/")
+
+@app.route('/logout', methods=['POST'])
+def logout_form():
+    """Processes logout form."""
+
+    for key, item in session:
+        del session[key]
+
+    return redirect("/")
+
 
 @app.route('/users')
 def user_list():
@@ -46,7 +74,6 @@ def user_list():
 
     users = User.query.all()
     return render_template('user_list.html', users=users)
-
 
 
 
