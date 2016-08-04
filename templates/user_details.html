@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>User Details</h2>
+
+<body>
+    Age: {{ users.age }}<br>
+    Zipcode: {{ users.zipcode }}<br>
+    List of Movies Rated:<br>
+    {% for ea_rating in movie_list %}
+    {{ ea_rating[1] }} : {{ ea_rating[0] }}<br>
+    {% endfor %} 
+                    
+
+
+</body>              
+
+{% endblock %}
+

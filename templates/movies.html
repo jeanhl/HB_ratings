@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>Rate These Movies</h2>
+
+<body>
+   
+    {% for each_movie in all_movies %}
+    <a href="/movie_details/{{ each_movie.movie_id }}"> {{each_movie.title}} </a><br>
+    {% endfor %} 
+
+
+
+</body>              
+
+{% endblock %}
+
